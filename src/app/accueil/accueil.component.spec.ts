@@ -26,5 +26,5 @@ describe('AccueilComponent', () => {
   it('champ prénom doit avoir plus de 2 caractères', () =>{
     expect(true).toBeTruthy();
   });
-  }
+  
 });
