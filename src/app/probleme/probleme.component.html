@@ -9,9 +9,34 @@
         (ngSubmit)="save()"
         [formGroup]="problemeForm">
         <div class="form-group row">
-          <label for="exampleInputEmail1">¨Prenom :</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          <label for="exampleInputEmail1" class="col-md-3 clo-form-label text-right">Prénom de l'utilisateur :</label>
+          <div class="col-md-9">
+          <input class="form-control" 
+          id="PrenomId" 
+          type ="text" 
+          placeholder="Entrer votre Prénom" 
+          formControlName="Prenom"
+          [ngClass]="{'is-invalid': (problemeForm.get('Prenom').touched ||
+          problemeForm.get('Prenom').dirty) &&
+          !problemeForm.get('Prenom').valid,
+          'is-valid': (problemeForm.get('Prenom').touched ||
+          problemeForm.get('Prenom').dirty) &&
+          problemeForm.get('Prenom').valid}"/>
+          <span class="form-text" *ngIf="(problemeForm.get('Prenom').touched ||
+          problemeForm.get('Prenom').dirty) &&
+          problemeForm.get('Prenom').errors">
+          <span *ngIf="problemeForm.get('Prenom').errors.minlength">
+            <small class="text-muted">
+              Veuillez entre plus de caractères
+            </small>
+          </span>
+          <span *ngIf="problemeForm.get('Prenom').errors.required">
+              <small class="text-muted">
+                Merci de saisir votre prénom
+              </small>
+            </span>
+        </span>  
+        </div>
         </div>
       </form>
     </div>
