@@ -17,13 +17,13 @@ import {ReactiveFormsModule} from '@angular/forms';
   declarations: [
     AppComponent,
     AccueilComponent,
-    ProblemeComponent,
-    ReactiveFormsModule
+    ProblemeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
