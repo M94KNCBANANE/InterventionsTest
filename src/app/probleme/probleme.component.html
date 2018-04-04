@@ -16,21 +16,25 @@
           type ="text" 
           placeholder="Entrer votre Prénom" 
           formControlName="Prenom"
-          [ngClass]="{'is-invalid': (problemeForm.get('Prenom').touched ||
+          [ngClass]="{
+          'is-invalid': (problemeForm.get('Prenom').touched ||
           problemeForm.get('Prenom').dirty) &&
-          !problemeForm.get('Prenom').valid,
+          !problemeForm.get('Prenom').errors.longueurMinimum,
+          
           'is-valid': (problemeForm.get('Prenom').touched ||
           problemeForm.get('Prenom').dirty) &&
-          problemeForm.get('Prenom').valid}"/>
+          problemeForm.get('Prenom').errors.longueurMinimum}"/>
+
           <span class="form-text" *ngIf="(problemeForm.get('Prenom').touched ||
           problemeForm.get('Prenom').dirty) &&
           problemeForm.get('Prenom').errors">
-          <span *ngIf="problemeForm.get('Prenom').errors.minlength">
+          
+          <span *ngIf="!problemeForm.get('Prenom').errors.longueurMinimum">
             <small class="text-muted">
               Veuillez entre plus de caractères
             </small>
           </span>
-          <span *ngIf="problemeForm.get('Prenom').errors.required">
+          <span *ngIf="!problemeForm.get('Prenom').errors.sansEspace">
               <small class="text-muted">
                 Merci de saisir votre prénom
               </small>
