@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { verifierCaracteresValidator } from '../shared/caracteres-validator';
 import { TypeDeProblemeService } from './type-de-probleme.service';
 import { ITypeDeProbleme } from './typeDeProbleme';
+import { EmailValideValidator } from '../shared/Email-Validator';
 
 @Component({
   selector: 'Inter-probleme',
@@ -40,7 +41,8 @@ export class ProblemeComponent implements OnInit {
     const CourrielControl = this.problemeForm.get('notificationCourrielGroupe.Courriel');
     const telephoneControl = this.problemeForm.get('telephone');
     const CourrielValidationControl = this.problemeForm.get('notificationCourrielGroupe.CourrielValidation');
-   
+    const CourrielGroupControl = this.problemeForm.get('notificationCourrielGroupe');
+
     CourrielControl.clearValidators();
     CourrielValidationControl.clearValidators();
     telephoneControl.clearValidators();
@@ -53,16 +55,21 @@ export class ProblemeComponent implements OnInit {
     telephoneControl.disable();
     CourrielValidationControl.disable();
     
-    if(typeNotification === 'MeNotifier'){
+    if(typeNotification === 'MeNotifierCourriel'){
       CourrielControl.enable();
-      CourrielControl.setValidators([Validators.required]);
+      CourrielControl.setValidators([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
+      CourrielValidationControl.enable();
+      CourrielValidationControl.setValidators([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
+      CourrielGroupControl.setValidators([Validators.compose([EmailValideValidator.EmailMatch()])]);
+    }
+    if(typeNotification === 'MeNotifierTelephone'){
       telephoneControl.enable();
       telephoneControl.setValidators([Validators.required]);
-      CourrielValidationControl.enable();
-      CourrielValidationControl.setValidators([Validators.required]);
+      
     }
     CourrielControl.updateValueAndValidity();
     telephoneControl.updateValueAndValidity();
     CourrielValidationControl.updateValueAndValidity();
+    CourrielGroupControl.updateValueAndValidity();
   }
 }
