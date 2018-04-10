@@ -9,7 +9,7 @@
         (ngSubmit)="save()"
         [formGroup]="problemeForm">
         <div class="form-group row">
-          <label for="exampleInputEmail1" class="col-md-3 clo-form-label text-right">Prénom :</label>
+          <label for="exampleInputPrenom" class="col-md-3 clo-form-label text-right">Prénom :</label>
           <div class="col-md-9">
           <input class="form-control" 
           id="PrenomId" 
@@ -42,6 +42,75 @@
         </span>  
         </div>
         </div>
+
+
+        <div class="form-group row">
+          <label for="exampleInputNom" class="col-md-3 clo-form-label text-right">Nom :</label>
+          <div class="col-md-9">
+          <input class="form-control" 
+          id="NomId" 
+          type ="text" 
+          placeholder="Entrer votre Nom" 
+          formControlName="Nom"
+          [ngClass]="{
+          'is-invalid': (problemeForm.get('Nom').touched ||
+          problemeForm.get('Nom').dirty) &&
+          !problemeForm.get('Nom').errors.longueurMinimum,
+          
+          'is-valid': (problemeForm.get('Nom').touched ||
+          problemeForm.get('Nom').dirty) &&
+          problemeForm.get('Nom').errors.longueurMinimum}"/>
+
+          <span class="form-text" *ngIf="(problemeForm.get('Nom').touched ||
+          problemeForm.get('Nom').dirty) &&
+          problemeForm.get('Nom').errors">
+          
+          <span *ngIf="!problemeForm.get('Nom').errors.longueurMinimum">
+            <small class="text-muted">
+              Veuillez entre plus de caractères
+            </small>
+          </span>
+          <span *ngIf="!problemeForm.get('Nom').errors.sansEspace">
+              <small class="text-muted">
+                Merci de saisir votre Nom
+              </small>
+            </span>
+        </span>  
+        </div>
+        </div>
+
+        <div class = 'form-group row'>
+          <label for='noProblemeId' class="col-md-2 col-form-label text-right">Type de problème:</label>
+          <div class="col-md-10">
+            <select class="form-control"
+            id='noProblemeId'
+            formControlName='noProbleme'
+            [ngClass]="{
+              'is-invalid': (problemeForm.get('noProbleme').touched ||
+              problemeForm.get('noProbleme').dirty) &&
+              problemeForm.get('noProbleme').errors,
+              
+              'is-valid': (problemeForm.get('noProbleme').touched ||
+              problemeForm.get('noProbleme').dirty) &&
+              !problemeForm.get('noProbleme').errors}"
+              >
+            <option value="">Sélectionner un type de problème (obligatoire)</option>
+              <option *ngFor="let type of typeProblemes" [value]="type.id">{{type.descriptionProbleme}}</option>
+          </select>
+          <span class="form-text" *ngIf="(problemeForm.get('noProbleme').touched ||
+          problemeForm.get('noProbleme').dirty) &&
+          problemeForm.get('noProbleme').errors">
+          
+          <span *ngIf="!problemeForm.get('noProbleme').required">
+            <small class="text-muted">
+              Merci de saisir votre type de problème
+            </small>
+          </span>
+        </span>
+        </div>
+        </div>
+
+
       </form>
     </div>
     
