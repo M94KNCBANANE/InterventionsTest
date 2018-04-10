@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProblemeComponent } from './probleme.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { TypeDeProblemeService } from './type-de-probleme.service';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('ProblemeComponent', () => {
   let component: ProblemeComponent;
@@ -10,8 +12,9 @@ describe('ProblemeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule,AngularFontAwesomeModule],
-      declarations: [ ProblemeComponent ]
+      imports: [ReactiveFormsModule,AngularFontAwesomeModule, HttpClientModule],
+      declarations: [ ProblemeComponent ],
+      providers: [ TypeDeProblemeService]
     })
     .compileComponents();
   }));
@@ -80,6 +83,44 @@ describe('ProblemeComponent', () => {
     zone.setValue(' '.repeat(2) + 'a');
     errors = zone.errors || {};
     expect(errors['longueurMinimum']).toBeFalsy();
+  });
+  it('Zone telephone est désactivé si non sélectionner', ()=>{
+    component.gestionNotification('Non');
+
+    let zone = component.problemeForm.get('telephone');
+    expect(zone.status).toEqual('DISABLED');
+  });
+
+  it('Zone telephone est vide quand ne pas me notifier', () =>{
+    component.gestionNotification('Non');
+    let zone = component.problemeForm.get('telephone');
+    expect(zone.value).toBeNull();
+  });
+
+  it('Zone Courriel est désactivé si non sélectionner', ()=>{
+    component.gestionNotification('Non');
+
+    let zone = component.problemeForm.get('notificationCourrielGroupe.CourrielValidation');
+    expect(zone.status).toEqual('DISABLED');
+  });
+
+  it('Zone Courriel est vide quand ne pas me notifier', () =>{
+    component.gestionNotification('Non');
+    let zone = component.problemeForm.get('notificationCourrielGroupe.Courriel');
+    expect(zone.value).toBeNull();
+  });
+
+  it('Zone courriel Validation est désactivé si non sélectionner', ()=>{
+    component.gestionNotification('Non');
+
+    let zone = component.problemeForm.get('notificationCourrielGroupe.CourrielValidation');
+    expect(zone.status).toEqual('DISABLED');
+  });
+
+  it('Zone courriel Validation est vide quand ne pas me notifier', () =>{
+    component.gestionNotification('Non');
+    let zone = component.problemeForm.get('notificationCourrielGroupe.CourrielValidation');
+    expect(zone.value).toBeNull();
   });
 
 });
