@@ -61,10 +61,9 @@ export class ProblemeComponent implements OnInit {
       CourrielValidationControl.enable();
       CourrielValidationControl.setValidators([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
       CourrielGroupControl.setValidators([Validators.compose([EmailValideValidator.EmailMatch()])]);
-    }
-    if(typeNotification === 'MeNotifierTelephone'){
+    }else if(typeNotification === 'MeNotifierMessagerie'){
       telephoneControl.enable();
-      telephoneControl.setValidators([Validators.required]);
+      telephoneControl.setValidators([Validators.required,Validators.pattern('[0-9]+'), Validators.minLength(10), Validators.maxLength(10)]);
       
     }
     CourrielControl.updateValueAndValidity();
