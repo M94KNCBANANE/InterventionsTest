@@ -12,8 +12,7 @@ import { EmailValideValidator } from '../shared/Email-Validator';
 })
 export class ProblemeComponent implements OnInit {
 
-  problemeForm: any;
-  produitForm: FormGroup;
+  problemeForm: FormGroup;
   typeProblemes: ITypeDeProbleme[];
   errorMessage: string;
   constructor(private fb: FormBuilder, private problemes: TypeDeProblemeService ) { }
@@ -23,8 +22,8 @@ export class ProblemeComponent implements OnInit {
       Prenom: ['',[verifierCaracteresValidator.longueurMinimum(3),verifierCaracteresValidator.sansEspace(), Validators.required]],
       Nom: ['',[verifierCaracteresValidator.longueurMinimum(3),verifierCaracteresValidator.sansEspace(), Validators.required]],
       noProbleme: ['',Validators.required],
-      Notification:['appliquerNotification'],
       telephone: [{value: '', disabled: true}],
+      notifier:['pasNotifier'],
       notificationCourrielGroupe: this.fb.group({
         Courriel: [{value: '', disabled: true}],
         CourrielValidation: [{value: '', disabled: true}]
@@ -35,6 +34,8 @@ export class ProblemeComponent implements OnInit {
     .subscribe(type => this.typeProblemes = type,
                error => this.errorMessage = <any>error);
 
+    this.problemeForm.get('notifier').valueChanges
+    .subscribe(value => this.gestionNotification(value));           
   }
 
   gestionNotification(typeNotification: string): void{
@@ -59,7 +60,7 @@ export class ProblemeComponent implements OnInit {
       CourrielControl.enable();
       CourrielControl.setValidators([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
       CourrielValidationControl.enable();
-      CourrielValidationControl.setValidators([Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+')]);
+      CourrielValidationControl.setValidators([Validators.required]);
       CourrielGroupControl.setValidators([Validators.compose([EmailValideValidator.EmailMatch()])]);
     }else if(typeNotification === 'MeNotifierMessagerie'){
       telephoneControl.enable();
