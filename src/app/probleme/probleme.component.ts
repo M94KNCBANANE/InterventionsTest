@@ -27,9 +27,11 @@ export class ProblemeComponent implements OnInit {
       notificationCourrielGroupe: this.fb.group({
         Courriel: [{value: '', disabled: true}],
         CourrielValidation: [{value: '', disabled: true}]
-      })
-
-    });
+      }),
+    descriptionProbleme: ['', [Validators.required, Validators.minLength(5)]],
+    noUnite:"",
+    dateProbleme: {value: Date(), disabled:true}
+     });
     this.problemes.obtenirProblemes()
     .subscribe(type => this.typeProblemes = type,
                error => this.errorMessage = <any>error);

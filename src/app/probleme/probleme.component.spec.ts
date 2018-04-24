@@ -42,7 +42,7 @@ describe('ProblemeComponent', () => {
     let zone = component.problemeForm.controls['Prenom'];
     zone.setValue('a'.repeat(3));
     errors = zone.errors || {};
-    expect(errors['longueurMinimum']).toBeTruthy();
+    expect(errors['longueurMinimum']).toBeUndefined();
   });
 
   it('champ prénom doit etre valide avec 200 caractères', () =>{
@@ -50,7 +50,7 @@ describe('ProblemeComponent', () => {
     let zone = component.problemeForm.controls['Prenom'];
     zone.setValue('a'.repeat(200));
     errors = zone.errors || {};
-    expect(errors['longueurMinimum']).toBeTruthy();
+    expect(errors['longueurMinimum']).toBeUndefined();
   });
 
   it('champ prénom doit être invalide sans valeur', () =>{
@@ -185,7 +185,7 @@ describe('ProblemeComponent', () => {
   it('Zone courriel est invalide avec un format non conforme', () => {
     component.gestionNotification('MeNotifierCourriel');
     let errors = {};
-    let zone = component.problemeForm.get('notificationCourrielGroupe.CourrielValidation');
+    let zone = component.problemeForm.get('notificationCourrielGroupe.Courriel');
     zone.setValue('asfsdftr342432523312fsdfsefsa');
     errors = zone.errors || {};
     expect(errors['pattern']).toBeTruthy();
