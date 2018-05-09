@@ -11,9 +11,9 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { ProblemeComponent } from './probleme/probleme.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { problemeData } from './probleme/probleme-data';
 import { TypeDeProblemeService } from './probleme/type-de-probleme.service';
+import { ProblemeService } from './probleme/probleme.service';
 
 
 
@@ -28,10 +28,8 @@ import { TypeDeProblemeService } from './probleme/type-de-probleme.service';
     AppRoutingModule,
     AngularFontAwesomeModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    HttpClientInMemoryWebApiModule .forRoot( problemeData , {delay: 1000})
-  ],
-  providers: [TypeDeProblemeService ],
+    HttpClientModule],
+  providers: [TypeDeProblemeService, ProblemeService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class TypeDeProblemeService {
-  private baseUrl = 'api/typeProbleme';
+  private baseUrl = 'https://interventionsfs.azurewebsites.net/api/Intervention';
   
   constructor(private _http: HttpClient) {   }
 

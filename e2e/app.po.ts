@@ -11,7 +11,7 @@ export class AppPage {
 
   setChampsValidesScenarioNominal() : void {
     element(by.id('PrenomId')).sendKeys('Pierre-Paul');
-    element(by.id('NomId')).sendKeys('Pierre-Paul');
+    element(by.id('NomId')).sendKeys('Paquette');
     // Sélectionner le premier élément dans la zone de liste déroulante
     element(by.id('noProblemeId')).all(by.tagName('option')).get(2).click();      
     // Cliquer sur la première option du bouton radio
